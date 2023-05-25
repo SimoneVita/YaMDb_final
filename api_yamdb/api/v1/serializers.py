@@ -1,7 +1,5 @@
-from rest_framework.serializers import (IntegerField,
-                                        ModelSerializer,
-                                        SlugRelatedField,
-                                        ValidationError)
+from rest_framework.serializers import (IntegerField, ModelSerializer,
+                                        SlugRelatedField, ValidationError)
 
 from reviews.models import Category, Comment, Genre, Review, Title
 

@@ -4,8 +4,8 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
 
 from users.models import User
-from .validators import (validate_email,
-                         validate_username,
+
+from .validators import (validate_email, validate_username,
                          validate_username_exists)
 
 

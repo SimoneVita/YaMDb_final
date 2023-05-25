@@ -1,15 +1,16 @@
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404
-from .filters import TitleFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, mixins, viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
+from reviews.models import Category, Genre, Review, Title
+
+from .filters import TitleFilter
 from .permissions import CustomPermission, IsAdminOrReadOnly
 from .serializers import (CategorySerializer, CommentSerializer,
                           GenreSerializer, ReviewSerializer,
                           TitleCreateSerializer, TitleGetSerializer)
-from reviews.models import Category, Genre, Review, Title
 
 
 class CustomBaseClass(
