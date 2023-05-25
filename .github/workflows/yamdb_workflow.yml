@@ -62,7 +62,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: simonevita/api_yamdb:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/api_yamdb:latest
 
   deploy:
     runs-on: ubuntu-latest
