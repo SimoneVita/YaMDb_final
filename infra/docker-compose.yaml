@@ -9,7 +9,6 @@ services:
       - ./.env
   web:
     image: simonevita/api_yamdb
-    build: ../api_yamdb
     restart: always
     volumes:
       - static_value:/app/static/
@@ -35,3 +34,4 @@ services:
 volumes:
   static_value:
   media_value:
+  db_data:
