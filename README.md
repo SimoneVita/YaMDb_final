@@ -26,18 +26,21 @@ _____________________________________________________
  > Postgres 13.0
  > Nginx 1.21.3
 
-### Как запустить проект:
+### Проект доступен по следующей ссылке:
+http://158.160.66.220/redoc/
+
+### Как локально запустить проект:
 !!!Запустить на локальной машине Docker!!!
 
 
 Клонировать репозиторий и перейти в него в командной строке:
 
 ```
-git clone https://github.com/SimoneVita/infra_sp2.git
+git clone https://github.com/SimoneVita/yamdb_final.git
 ```
 
 ```
-cd infra_sp2/infra
+cd infra
 ```
 
 Создать файл .env:
@@ -111,6 +114,57 @@ http://localhost/redoc/
 ```
 simonevita / api_yamdb
 ```
+
+## Запуск проекта на боевом сервере
+
+Устанавливаем на сервер docker и docker-compose
+
+Копируем на сервер файлы docker-compose.yaml и default.conf
+
+Переходим в директорию infra и вводим команду:
+```
+scp docker-compose.yaml <логин_на_сервере>@<IP_сервера>:/home/<логин_на_сервере>/docker-compose.yaml
+```
+далее вводим следующие команды:
+```
+cd nginx
+scp default.conf <логин_на_сервере>@<IP_сервера>:/home/<логин_на_сервере>/nginx/default.conf
+```
+В Secrets на Github необходимо добавить следующие переменные:
+```
+DB_ENGINE=django.db.backends.postgresql # указать, что проект работает с postgresql
+DB_NAME=postgres # имя базы данных
+POSTGRES_USER=postgres # логин для подключения к базе данных
+POSTGRES_PASSWORD=postgres # пароль для подключения к БД
+DB_HOST=db # название сервиса БД (контейнера) 
+DB_PORT=5432 # порт для подключения к БД
+DOCKER_USERNAME= # Username на DockerHub
+DOCKER_PASSWORD= # Пароль на DockerHub
+HOST= # ip боевого сервера
+USER= # Имя пользователя на удалённом сервере
+SSH_KEY= # SSH-key компьютера (локальный ключ), с которого будет происходить подключение к удалённому серверу
+PASSPHRASE= #Если для ssh используется фраза-пароль
+TELEGRAM_TO= #ID пользователя в Telegram, можно узнать у @userinfobot
+TELEGRAM_TOKEN= #ID бота в Telegram подскажет @BotFather
+```
+
+После успешного пуша и в случае, если все переменные указаны верно проект запустится на сервере.
+
+Далее в терминале, подключенном к боевому серверу вводим поочередно следующие команды:
+```
+sudo docker-compose exec web python manage.py makemigrations
+```
+```
+sudo docker-compose exec web python manage.py migrate
+```
+```
+sudo docker-compose exec web python manage.py collectstatic --no-input
+```
+```
+sudo docker-compose exec web python manage.py createsuperuser
+```
+Проект зарущен, с помощью супрюзера можно подключаться
+
 ## Примеры запросов
 ### Регистрация пользователя
 >Тип запроса 
