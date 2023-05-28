@@ -8,6 +8,7 @@ services:
     env_file:
       - ./.env
   web:
+    container_name: web
     image: simonevita/api_yamdb
     restart: always
     volumes:
