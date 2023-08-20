@@ -193,5 +193,8 @@ ______________________________________
 Андрей Иванишин(https://github.com/AIvanishin),
 Виталий Симоненко(https://github.com/SimoneVita)
 
+### Оригинальный проект, над которым велась совместная разработка
+https://github.com/cra1ger51/api_yamdb
+
 ### Лицензия
 BSD 3-Clause License
